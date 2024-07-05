@@ -4,4 +4,4 @@ author: 'Tomas Carnecky <tomc@caurea.org>'
 
 runs:
   using: node20
-  main: index.js
+  main: index.mjs
