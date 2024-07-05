@@ -4,7 +4,7 @@ const res = await fetch(`https://${URNERYS}/rpc/setBaseline`, {
   method: "POST",
   body: JSON.stringify({
     project: GITHUB_REPOSITORY.split('/')[1],
-    baseline: "production"
+    baseline: "production",
     build: GITHUB_RUN_ID,
   }),
 });
