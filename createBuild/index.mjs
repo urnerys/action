@@ -1,6 +1,6 @@
 const { URNERYS, GITHUB_RUN_ID, GITHUB_SHA } = process.env
 
-const res = await fetch(`https://${URNERYS}/rpc/createBuild", {
+const res = await fetch(`https://${URNERYS}/rpc/createBuild`, {
   method: "POST",
   body: JSON.stringify({
     project: "stories",
