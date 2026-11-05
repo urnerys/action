@@ -1,5 +1,5 @@
 name: Urnerys Create Build
-description: Create a build for the current workflow run. The identifier of the build is github-run-<run id>-<run attempt>. Requires the Urnerys Login action to have run in the same job.
+description: Create a build for the current workflow run. The identifier of the build is github-run-<run id>-<run attempt>. Exchanges its own access token, so the job needs the id-token write permission.
 
 inputs:
   project:
