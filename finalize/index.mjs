@@ -1,14 +1,14 @@
 import { getInput, run } from "../lib/actions.mjs";
-import { api, projectName } from "../lib/urnerys.mjs";
+import { api, exchangeToken, projectName } from "../lib/urnerys.mjs";
 
 export async function main() {
-  const token = process.env.URNERYS_TOKEN;
-  if (!token) {
-    throw new Error("URNERYS_TOKEN is not set. Run the login action before this one.");
+  const mode = getInput("mode");
+  if (mode !== "check" && mode !== "promote") {
+    throw new Error(`Unknown mode "${mode}". Use "check" or "promote".`);
   }
 
-  const mode = getInput("mode");
-  const baseline = encodeURIComponent(getInput("baseline"));
+  const baselineName = getInput("baseline");
+  const baseline = encodeURIComponent(baselineName);
   const project = encodeURIComponent(getInput("project") || projectName());
 
   const buildId = getInput("build") || process.env.URNERYS_BUILD_ID;
@@ -17,28 +17,20 @@ export async function main() {
   }
   const build = encodeURIComponent(buildId);
 
-  let result;
+  const token = await exchangeToken();
 
-  switch (mode) {
-    case "check":
-      result = await api("POST", `/projects/${project}/builds/${build}/checks`, {
-        token,
-        json: { check: { baseline: getInput("baseline") } },
-      });
-      break;
+  const result =
+    mode === "check"
+      ? await api("POST", `/projects/${project}/builds/${build}/checks`, {
+          token,
+          json: { check: { baseline: baselineName } },
+        })
+      : await api("PATCH", `/projects/${project}/baselines/${baseline}`, {
+          token,
+          json: { baseline: { build: buildId } },
+        });
 
-    case "promote":
-      result = await api("PATCH", `/projects/${project}/baselines/${baseline}`, {
-        token,
-        json: { baseline: { build: buildId } },
-      });
-      break;
-
-    default:
-      throw new Error(`Unknown mode "${mode}". Use "check" or "promote".`);
-  }
-
-  console.log(`${mode} of build ${buildId} against baseline ${getInput("baseline")} succeeded.`);
+  console.log(`${mode} of build ${buildId} against baseline ${baselineName} succeeded.`);
   if (result !== undefined) {
     console.log(JSON.stringify(result));
   }

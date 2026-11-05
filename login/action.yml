@@ -1,5 +1,5 @@
 name: Urnerys Login
-description: Exchange the GitHub OIDC token of the job for an Urnerys access token and export it as URNERYS_TOKEN.
+description: Exchange the GitHub OIDC token of the job for an Urnerys access token and export it as URNERYS_TOKEN, for code that calls Urnerys itself. The other actions exchange their own token. The job needs the id-token write permission.
 
 inputs:
   host:

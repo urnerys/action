@@ -1,5 +1,5 @@
 name: Urnerys Finalize
-description: Finish a build, either by checking it against a baseline or by making it the new baseline. Requires the Urnerys Login action to have run in the same job.
+description: Finish a build, either by checking it against a baseline or by making it the new baseline. Exchanges its own access token, so the job needs the id-token write permission.
 
 inputs:
   mode:
