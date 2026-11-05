@@ -11,9 +11,9 @@ export async function main() {
   const baseline = encodeURIComponent(getInput("baseline"));
   const project = encodeURIComponent(getInput("project") || projectName());
 
-  const buildId = getInput("build") || process.env.BUILDID;
+  const buildId = getInput("build") || process.env.URNERYS_BUILD_ID;
   if (!buildId) {
-    throw new Error("No build. Set the `build` input or the BUILDID environment variable.");
+    throw new Error("No build. Set the `build` input or the URNERYS_BUILD_ID environment variable.");
   }
   const build = encodeURIComponent(buildId);
 

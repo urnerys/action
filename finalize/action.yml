@@ -14,7 +14,7 @@ inputs:
     description: Name of the project. Defaults to the name of the repository.
     required: false
   build:
-    description: Identifier of the build. Defaults to the BUILDID environment variable.
+    description: Identifier of the build. Defaults to the URNERYS_BUILD_ID environment variable, which the Urnerys Create Build action exports.
     required: false
   host:
     description: Hostname of the Urnerys instance, without scheme. Falls back to the URNERYS_HOST environment variable.

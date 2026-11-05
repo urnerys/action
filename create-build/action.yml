@@ -1,0 +1,21 @@
+name: Urnerys Create Build
+description: Create a build for the current workflow run. The identifier of the build is github-run-<run id>-<run attempt>. Requires the Urnerys Login action to have run in the same job.
+
+inputs:
+  project:
+    description: Name of the project. Defaults to the name of the repository.
+    required: false
+  commit:
+    description: The commit the build was made from. Defaults to the commit of the workflow run.
+    required: false
+  host:
+    description: Hostname of the Urnerys instance, without scheme. Falls back to the URNERYS_HOST environment variable.
+    required: false
+
+outputs:
+  build:
+    description: Identifier of the build. Also exported as the URNERYS_BUILD_ID environment variable to the following steps of the job.
+
+runs:
+  using: node24
+  main: index.mjs
