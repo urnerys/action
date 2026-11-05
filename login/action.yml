@@ -1,0 +1,11 @@
+name: Urnerys Login
+description: Exchange the GitHub OIDC token of the job for an Urnerys access token and export it as URNERYS_TOKEN.
+
+inputs:
+  host:
+    description: Hostname of the Urnerys instance, without scheme. Falls back to the URNERYS_HOST environment variable.
+    required: false
+
+runs:
+  using: node24
+  main: index.mjs

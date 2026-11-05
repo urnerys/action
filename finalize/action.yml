@@ -1,0 +1,25 @@
+name: Urnerys Finalize
+description: Finish a build, either by checking it against a baseline or by making it the new baseline. Requires the Urnerys Login action to have run in the same job.
+
+inputs:
+  mode:
+    description: "`check` checks the build against the baseline. `promote` makes the build the new baseline."
+    required: false
+    default: check
+  baseline:
+    description: Name of the baseline.
+    required: false
+    default: production
+  project:
+    description: Name of the project. Defaults to the name of the repository.
+    required: false
+  build:
+    description: Identifier of the build. Defaults to the BUILDID environment variable.
+    required: false
+  host:
+    description: Hostname of the Urnerys instance, without scheme. Falls back to the URNERYS_HOST environment variable.
+    required: false
+
+runs:
+  using: node24
+  main: index.mjs
