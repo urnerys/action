@@ -1,0 +1,7 @@
+name: 'The name of your action here'
+description: 'Provide a description here'
+author: 'Tomas Carnecky <tomc@caurea.org>'
+
+runs:
+  using: node20
+  main: index.mjs
