@@ -10,7 +10,6 @@ export async function main() {
     throw new Error("The job cannot request an OIDC token. Grant the job the `id-token: write` permission.");
   }
 
-  /* Ask GitHub for an OIDC token which is issued for the Urnerys instance. */
   const url = new URL(requestUrl);
   url.searchParams.set("audience", `https://${host}`);
 
@@ -20,7 +19,6 @@ export async function main() {
   }
   mask(oidc.value);
 
-  /* Exchange it for an access token of the Urnerys instance (RFC 8693). */
   const access = await api("POST", "/token", {
     form: {
       grant_type: "urn:ietf:params:oauth:grant-type:token-exchange",
@@ -32,7 +30,6 @@ export async function main() {
     throw new Error("Urnerys did not return an access token.");
   }
 
-  /* The token must be masked before it is written anywhere. */
   mask(access.access_token);
   exportVariable("URNERYS_TOKEN", access.access_token);
 }
